@@ -6,16 +6,32 @@ import Link from 'next/link';
 import styles from '../../styles/Details.module.css';
 
 
-//SERVERSIDE CODE
-export async function getServerSideProps({ params }){
-    const resp = await fetch(`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${params.id}.json`);
+//STATICSIDE CODE
+
+export async function getStaticPaths(){
+    const resp = await fetch(`https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json`);
+
+    const pokemon = await resp.json();
 
     return {
-        props: {
-          pokemon: await resp.json(),
-        },
+        paths: pokemon.map((pokemon) => ({
+            params: { id: pokemon.id.toString() },
+        })),
+        fallback:false,
     };
 }
+
+//SERVERSIDE CODE
+
+// export async function getServerSideProps({ params }){
+//     const resp = await fetch(`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${params.id}.json`);
+
+//     return {
+//         props: {
+//           pokemon: await resp.json(),
+//         },
+//     };
+// }
 
 export default function Details({ pokemon }) {
 

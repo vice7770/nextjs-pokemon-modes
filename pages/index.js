@@ -4,7 +4,17 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
+//STATICSIDE CODE
 
+export async function getStaticSideProps() {
+  const resp = await fetch("https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json");
+
+  return {
+    props: {
+      pokemon: await resp.json(),
+    },
+  };
+}
 
 //SERVERSIDE CODE
 export async function getServerSideProps() {
