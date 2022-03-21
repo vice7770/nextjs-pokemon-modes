@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css';
 
 //STATICSIDE CODE
 
-export async function getStaticSideProps() {
+export async function getStaticProps() {
   const resp = await fetch("https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json");
 
   return {
@@ -17,15 +17,15 @@ export async function getStaticSideProps() {
 }
 
 //SERVERSIDE CODE
-export async function getServerSideProps() {
-  const resp = await fetch("https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json");
+// export async function getServerSideProps() {
+//   const resp = await fetch("https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json");
 
-  return {
-    props: {
-      pokemon: await resp.json(),
-    },
-  };
-}
+//   return {
+//     props: {
+//       pokemon: await resp.json(),
+//     },
+//   };
+// }
 
 export default function Home({ pokemon }) {
   // const [pokemon, setPokemon] = useState([]);
